@@ -25,9 +25,13 @@ class Phantoman extends \Codeception\Platform\Extension
 
     private $pipes;
 
+    private $logDir;
+
     public function __construct($config, $options)
     {
         parent::__construct($config, $options);
+
+        $this->logDir = $config['paths']['log'];
 
         // Set default path for PhantomJS to "vendor/bin/phantomjs" for if it was installed via composer
         if (!isset($this->config['path'])) {
@@ -81,8 +85,8 @@ class Phantoman extends \Codeception\Platform\Extension
 
         $descriptorSpec = array(
             array('pipe', 'r'),
-            array('file', $this->getLogDir() . 'phantomjs.output.txt', 'w'),
-            array('file', $this->getLogDir() . 'phantomjs.errors.txt', 'a')
+            array('file', $this->logDir . 'phantomjs.output.txt', 'w'),
+            array('file', $this->logDir . 'phantomjs.errors.txt', 'a')
         );
 
         $this->resource = proc_open($command, $descriptorSpec, $this->pipes, null, null, array('bypass_shell' => true));
