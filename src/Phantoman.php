@@ -85,8 +85,8 @@ class Phantoman extends \Codeception\Platform\Extension
 
         $descriptorSpec = array(
             array('pipe', 'r'),
-            array('file', $this->logDir . 'phantomjs.output.txt', 'w'),
-            array('file', $this->logDir . 'phantomjs.errors.txt', 'a')
+            array('file', $this->logDir . '/phantomjs.output.txt', 'w'),
+            array('file', $this->logDir . '/phantomjs.errors.txt', 'a')
         );
 
         $this->resource = proc_open($command, $descriptorSpec, $this->pipes, null, null, array('bypass_shell' => true));
